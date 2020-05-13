@@ -1,14 +1,16 @@
 from rentomatic.domain import storageroom as sr
 from rentomatic.use_cases import storageroom_use_cases as uc
 
+from typing import List
+
 class MemRepo(uc.StorageRoomRepo):
 
-    def __init__(self, entries=None):
+    def __init__(self, entries :List[dict]=None):
         self._entries = []
         if entries:
             self._entries.extend(entries)
 
-    def _check(self, element, key, value):
+    def _check(self, element, key, value) -> bool:
         if '__' not in key:
             key = key + '__eq'
 
@@ -26,7 +28,7 @@ class MemRepo(uc.StorageRoomRepo):
 
         return getattr(element[key], operator)(value)
 
-    def list(self, filters=None) -> list:
+    def list(self, filters: dict=None) -> List[sr.StorageRoom]:
         if not filters:
             result = self._entries
         else:

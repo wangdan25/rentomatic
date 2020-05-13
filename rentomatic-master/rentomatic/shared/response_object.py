@@ -1,7 +1,9 @@
+
+from typing import Optional, Any
 class ResponseSuccess(object):
     SUCCESS = 'SUCCESS'
 
-    def __init__(self, value=None):
+    def __init__(self, value: Optional[Any]=None):
         self.type = self.SUCCESS
         self.value = value
 
@@ -16,7 +18,7 @@ class ResponseFailure(object):
     PARAMETERS_ERROR = 'PARAMETERS_ERROR'
     SYSTEM_ERROR = 'SYSTEM_ERROR'
 
-    def __init__(self, type_, message):
+    def __init__(self, type_: str, message: str):
         self.type = type_
         self.message = self._format_message(message)
 
